@@ -562,7 +562,8 @@ public final class CollationFactory {
             null,
             CollationAwareUTF8String::compareLowerCase,
             "1.0",
-            s -> (long) CollationAwareUTF8String.lowerCaseCodePoints(s).hashCode(),
+            s -> (long) CollationAwareUTF8String.
+                    lowerCaseCodePoints(trimSpaces(s, spaceTrimming)).hashCode(),
             /* supportsBinaryEquality = */ false,
             /* supportsBinaryOrdering = */ false,
             /* supportsLowercaseEquality = */ true);
@@ -930,9 +931,12 @@ public final class CollationFactory {
           normalizedCollationName(),
           PROVIDER_ICU,
           collator,
-          (s1, s2) -> collator.compare(s1.toValidString(), s2.toValidString()),
+          (s1, s2) -> collator.compare(
+                  trimSpaces(s1, spaceTrimming).toValidString(),
+                  trimSpaces(s2, spaceTrimming).toValidString()),
           ICU_COLLATOR_VERSION,
-          s -> (long) collator.getCollationKey(s.toValidString()).hashCode(),
+          s -> (long) collator.getCollationKey(
+                  trimSpaces(s, spaceTrimming).toValidString()).hashCode(),
           /* supportsBinaryEquality = */ false,
           /* supportsBinaryOrdering = */ false,
           /* supportsLowercaseEquality = */ false);
