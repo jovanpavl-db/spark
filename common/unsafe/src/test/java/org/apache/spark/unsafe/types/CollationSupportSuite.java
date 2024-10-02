@@ -39,6 +39,27 @@ public class CollationSupportSuite {
   private final String[] testSupportedCollations =
     {"UTF8_BINARY", "UTF8_LCASE", "UNICODE", "UNICODE_CI"};
 
+  /*
+   * A list of collations supporting compare operations.
+   */
+  private final String[] testCompareSupportedCollations =
+  {
+    "UTF8_BINARY",
+    "UTF8_LCASE",
+    "UNICODE",
+    "UNICODE_CI",
+    "UTF8_BINARY_TRIM",
+    "UTF8_BINARY_LTRIM",
+    "UTF8_BINARY_RTRIM",
+    "UTF8_LCASE_TRIM",
+    "UTF8_LCASE_LTRIM",
+    "UTF8_LCASE_RTRIM",
+    "UNICODE_TRIM",
+    "UNICODE_LTRIM",
+    "UNICODE_RTRIM"
+  };
+
+
   /**
    * Collation-aware UTF8String comparison and equality check.
    */
@@ -57,7 +78,7 @@ public class CollationSupportSuite {
 
   @Test
   public void testCompare() throws SparkException {
-    for (String collationName: testSupportedCollations) {
+    for (String collationName: testCompareSupportedCollations) {
       // Empty strings.
       assertCompare("", "", collationName, 0);
       assertCompare("a", "", collationName, 1);
